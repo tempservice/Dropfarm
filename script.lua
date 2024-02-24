@@ -27,7 +27,6 @@ local ReplicatedStorage = services.replicatedStorage
 local PathfindingService = services.pathFindingService
 local RunService = services.runService
 local TeleportService = services.teleportService
-local TweenService = services.tweenService
 
 --Random Stuff
 local config = {
@@ -197,7 +196,7 @@ local function ServerHop()
 	pcall(function()
 		TPS:TeleportToPlaceInstance(_place,Server.id,game:GetService("Players").LocalPlayer)
 	end)
-
+	
 	ServerHopping = true
 end
 
@@ -442,16 +441,11 @@ local function RobCrate()
 	local dropDone = false
 
 	repeat 
-		if not pcall(function()
-				dropMAIN.BriefcasePress:FireServer(false)
-				task.wait(1)
-				dropMAIN.BriefcasePress:FireServer(true)
-				dropMAIN.BriefcaseCollect:FireServer()
-			end) then
-			dropDone = true
-		end
-
-	until dropMAIN:GetAttribute("BriefcaseCollected") == true or not dropMAIN or dropDone
+		dropMAIN.BriefcasePress:FireServer(false)
+		task.wait(1)
+		dropMAIN.BriefcasePress:FireServer(true)
+		dropMAIN.BriefcaseCollect:FireServer()
+	until dropMAIN:GetAttribute("BriefcaseCollected") == true or not dropMAIN:FindFirstChild("Root")
 
 	task.wait(0.75)
 
@@ -481,22 +475,22 @@ local viableLocations = {  -- blitzisking was here too lol
 	Vector3.new(2698, 39, -5365) 
 }
 
-local function LoadMap()
+local function LoadMap() -- blitzisking was here lol
 	local originalCameraType = game:GetService("Workspace").CurrentCamera.CameraType
 	game:GetService("Workspace").CurrentCamera.CameraType = Enum.CameraType.Scriptable
 	for _, position in ipairs(viableLocations) do
 		local tweenInfo = TweenInfo.new(
-			0.8,
+			2,
 			Enum.EasingStyle.Linear,
 			Enum.EasingDirection.Out,
 			0,
 			false,
 			0
 		)
-
+	
 		local tween = TweenService:Create(game:GetService("Workspace").CurrentCamera, tweenInfo, {CFrame = CFrame.new(position)})
 		tween:Play()
-
+	
 		tween.Completed:Wait()
 	end
 	game:GetService("Workspace").CurrentCamera.CameraType = originalCameraType
@@ -821,13 +815,11 @@ print("[DROPFARM] Map loading by blitzisking#0")
 LoadMap()
 
 while task.wait() do
-	if workspace:FindFirstChild("Drop") then
+	if workspace:FindFirstChild("Drop") and workspace:FindFirstChild("Drop"):GetAttribute("BriefcaseLanded") == true then
 		RobCrate()
 	elseif robberies.ship.open and not robberies.ship.hasRobbed then
 		RobShip()
 		robberies.ship.hasRobbed = true
-	elseif robberies.crate.open then
-		RobCrate()
 	elseif robberies.mansion.open and player.Folder:FindFirstChild("MansionInvite") then
 		RobMansion()
 	else
