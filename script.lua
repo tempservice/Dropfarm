@@ -836,7 +836,7 @@ spawn(function()
 end)
 
 while wait() do
-	if DropGetter then
+	if DropGetter ~= nil then
 		HidePickingTeam()
 		RobCrate()
 		DropGetter = nil
