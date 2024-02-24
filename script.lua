@@ -1,8 +1,9 @@
 repeat task.wait(1) until game:IsLoaded()
 
-task.wait(3)
 
 local ServerHopping = false
+
+task.wait(3)
 
 LPH_JIT_MAX = function(...) return ... end
 LPH_NO_VIRTUALIZE = function(...) return ... end
@@ -825,9 +826,9 @@ while true do
 	if robberies.ship.open == true and robberies.ship.hasRobbed == true or robberies.crate.open == false and robberies.mansion.open == false then ServerHop() return end
 	if robberies.ship.open == false and robberies.ship.hasRobbed == false or robberies.crate.open == false and robberies.mansion.open == false then ServerHop() return end
 	
-	task.wait(1.15)
+	wait(.1)
 	
 	if robberies.ship.open and ServerHopping == false then HidePickingTeam() RobShip() end
 	if robberies.crate.open and ServerHopping == false then HidePickingTeam() RobCrate() end
-	if robberies.mansion.open and ServerHopping == false then HidePickingTeam() end
+	if robberies.mansion.open and ServerHopping == false then HidePickingTeam() RobMansion() end
 end
