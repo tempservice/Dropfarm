@@ -19,8 +19,6 @@ end
 
 if HasRendered == false then RenderWorkspace() HasRendered = true end
 
-task.wait(3)
-
 LPH_JIT_MAX = function(...) return ... end
 LPH_NO_VIRTUALIZE = function(...) return ... end
 
