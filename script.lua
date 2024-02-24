@@ -822,31 +822,44 @@ local function RobMansion()
 	if not SmallTP(CFrame.new(3106, 57, -4377)) then return end
 end
 
-local DropGetter
+local function checkRobberies()
+	if robberies.ship.open then 
+		HidePickingTeam() 
+		RobShip() 
+	end
+	if (robberies.crate.open or game.Workspace:FindFirstChild("Drop") or DropGetter ~= nil) then 
+		HidePickingTeam() 
+		RobCrate() 
+	end
+	if robberies.mansion.open and player.Folder:FindFirstChild("MansionInvite") then 
+		HidePickingTeam() 
+		RobMansion() 
+	end
+end
+
+local function checkServerHop()
+	if not (robberies.ship.open or robberies.crate.open or DropGetter or robberies.mansion.open) then
+		ServerHop()
+	elseif robberies.ship.open and robberies.ship.hasRobbed and not (robberies.crate.open or DropGetter or robberies.mansion.open) then
+		ServerHop()
+	end
+end
+
 spawn(function()
 	while true do
-		if game.Workspace:FindFirstChild("Drop") then
-			DropGetter = game.Workspace:FindFirstChild("Drop")
-		end
+		DropGetter = game.Workspace:FindFirstChild("Drop") or DropGetter
 		wait(.1)
 	end
 end)
 
 spawn(function()
 	while true do
-		if robberies.ship.open then HidePickingTeam() RobShip() end
-		if robberies.crate.open or game.Workspace:FindFirstChild("Drop") or DropGetter ~= nil then HidePickingTeam() RobCrate() end
-		if robberies.mansion.open and player.Folder:FindFirstChild("MansionInvite") then HidePickingTeam() RobMansion() end
+		checkRobberies()
 		wait(.1)
 	end
 end)
 
 while true do
-	if robberies.ship.open == false and robberies.crate.open == false and DropGetter == nil and robberies.mansion.open == false then
-		ServerHop()
-	end
-	if robberies.ship.open and robberies.ship.hasRobbed and robberies.crate.open == false and DropGetter == nil and robberies.mansion.open == false then
-		ServerHop()
-	end
-    wait(.1)
+	checkServerHop()
+	wait(.1)
 end
