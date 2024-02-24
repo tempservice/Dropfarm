@@ -196,7 +196,7 @@ local function ServerHop()
 	pcall(function()
 		TPS:TeleportToPlaceInstance(_place,Server.id,game:GetService("Players").LocalPlayer)
 	end)
-	
+
 	ServerHopping = true
 end
 
@@ -487,10 +487,10 @@ local function LoadMap() -- blitzisking was here lol
 			false,
 			0
 		)
-	
-		local tween = TweenService:Create(game:GetService("Workspace").CurrentCamera, tweenInfo, {CFrame = CFrame.new(position)})
+
+		local tween = game:GetService("TweenService"):Create(game:GetService("Workspace").CurrentCamera, tweenInfo, {CFrame = CFrame.new(position)})
 		tween:Play()
-	
+
 		tween.Completed:Wait()
 	end
 	game:GetService("Workspace").CurrentCamera.CameraType = originalCameraType
