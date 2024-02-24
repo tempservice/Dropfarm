@@ -799,7 +799,7 @@ while wait() do
 		HidePickingTeam()
 		RobShip()
 		robberies.ship.hasRobbed = true
-	elseif robberies.crate.open or DropGetter ~= nil then
+	elseif robberies.crate.open or DropGetter then
 		HidePickingTeam()
 		RobCrate()
 	elseif robberies.mansion.open and player.Folder:FindFirstChild("MansionInvite") then
