@@ -821,6 +821,10 @@ end
 
 local DropGetter
 
+print("[DROPFARM] Loading resources...")
+wait(.1)
+print("[DROPFARM] Loaded!")
+
 spawn(function()
 	while true do
 		if game.Workspace:FindFirstChild("Drop") then
@@ -832,21 +836,23 @@ spawn(function()
 end)
 
 while wait() do
-	if DropGetter then
-		HidePickingTeam()
-		RobCrate()
-		DropGetter = nil
-	elseif robberies.ship.open and robberies.ship.hasRobbed == false then
-		HidePickingTeam()
-		RobShip()
-		robberies.ship.hasRobbed = true
-	elseif robberies.crate.open then
-		HidePickingTeam()
-		RobCrate()
-	elseif robberies.mansion.open and player.Folder:FindFirstChild("MansionInvite") then
-		HidePickingTeam()
-		RobMansion()
-	else
-		ServerHop()
-	end
+	pcall(function()
+		if DropGetter then
+			HidePickingTeam()
+			RobCrate()
+			DropGetter = nil
+		elseif robberies.ship.open and robberies.ship.hasRobbed == false then
+			HidePickingTeam()
+			RobShip()
+			robberies.ship.hasRobbed = true
+		elseif robberies.crate.open then
+			HidePickingTeam()
+			RobCrate()
+		elseif robberies.mansion.open and player.Folder:FindFirstChild("MansionInvite") then
+			HidePickingTeam()
+			RobMansion()
+		else
+			ServerHop()
+		end
+	end)
 end
