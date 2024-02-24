@@ -821,7 +821,7 @@ local function RobMansion()
 end
 
 while true do
-	if robberies.ship.open == false and robberies.ship.hasRobbed == false and robberies.mansion.open == false then ServerHopping = true ServerHop() return end
+	if robberies.ship.open == false and robberies.ship.hasRobbed == false or true and robberies.crate.open == false and robberies.mansion.open == false then ServerHop() return end
 	
 	task.wait()
 	
