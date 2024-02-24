@@ -168,8 +168,7 @@ local function WaitForReward()
 	end
 end
 
-local ServerHop = function()
-	ServerHopping = true
+local function ServerHop()
 	queue_on_teleport([[
 		loadstring(game:HttpGet("https://dropfarm.vercel.app/script.lua"))()
     ]])
@@ -440,9 +439,6 @@ local RobShip = LPH_NO_VIRTUALIZE(function()
 	ropePull.CanCollide = true
 	ropePull.Massless = false
 	rope.Length = 30
-
-	if robberies.ship.open == false and robberies.crate.open == false and robberies.mansion.open == false then ServerHop() return end
-	if robberies.ship.open and robberies.ship.hasRobbed == true then ServerHop() return end
 end)
 
 local function TeleporterC(pos, duration)
