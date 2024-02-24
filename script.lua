@@ -144,7 +144,7 @@ coroutine.wrap(LPH_JIT_MAX(function()
 	while true do
 		UpdateStatus(robberyConsts.ENUM_ROBBERY.MANSION, 'mansion', 'open', false, true)
 		UpdateStatus(robberyConsts.ENUM_ROBBERY.CARGO_SHIP, 'ship', 'open')
-		robberies['crate'].open = (services.workspace:FindFirstChild('Drop') and true) or false
+		robberies['crate'].open = (game.Workspace:FindFirstChild('Drop') and true) or false
 		task.wait(0.1)
 	end
 end))()
