@@ -805,13 +805,13 @@ while wait() do
 	elseif robberies.mansion.open and player.Folder:FindFirstChild("MansionInvite") then
 		HidePickingTeam()
 		RobMansion()
-	end
-
-	if not ServerHopping then
-		repeat 
-			task.wait() 
-			print("HOPPING") 
-			ServerHop() 
-		until ServerHopping
+	else
+		if not ServerHopping then
+			repeat 
+				task.wait() 
+				print("HOPPING") 
+				ServerHop() 
+			until ServerHopping
+		end
 	end
 end
