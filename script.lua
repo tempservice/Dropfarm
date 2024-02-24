@@ -856,5 +856,7 @@ while wait() do
 	end	
 	
 	
-	repeat task.wait() print"HOPPING" ServerHop() until ServerHopping == true
+	if not pcall(function()
+		repeat task.wait() print"HOPPING" ServerHop() until ServerHopping == true
+	end) then print"Error" end
 end
