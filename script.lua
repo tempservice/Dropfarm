@@ -829,7 +829,7 @@ spawn(function()
 			DropGetter = game.Workspace:FindFirstChild("Drop")
 			print(DropGetter)
 		end
-		wait()
+		task.wait()
 	end
 end)
 
@@ -838,5 +838,8 @@ while true do
 	if robberies.crate.open or game.Workspace:FindFirstChild("Drop") or DropGetter then HidePickingTeam() RobCrate() end
 	if robberies.mansion.open and player.Folder:FindFirstChild("MansionInvite") then HidePickingTeam() RobMansion() end
 
-	ServerHop() return
+	if robberies.ship.open == false and robberies.mansion.open == false and robberies.crate.open == false and DropGetter == nil then ServerHop() return end
+	if robberies.ship.open == true and robberies.ship.hasRobbed == true and robberies.mansion.open == false and robberies.crate.open == false and DropGetter == nil then ServerHop() return end
+	
+	task.wait()
 end
