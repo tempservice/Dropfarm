@@ -1,4 +1,4 @@
-if not game:IsLoaded() then game.Loaded:Wait() task.wait(3) end
+repeat task.wait(1) until game:IsLoaded()
 
 local ServerHopping = false
 
@@ -825,12 +825,12 @@ local function RobMansion()
 end
 
 while true do
-	pcall(function()
-		if robberies.ship.open == true and robberies.ship.hasRobbed == true or robberies.crate.open == false and robberies.mansion.open == false then ServerHop() return end
-		if robberies.ship.open == false and robberies.ship.hasRobbed == false or robberies.crate.open == false and robberies.mansion.open == false then ServerHop() return end
-
-		if robberies.ship.open and ServerHopping == false then RobShip() end
-		if robberies.crate.open and ServerHopping == false then RobCrate() end
-		if robberies.mansion.open and ServerHopping == false then RobMansion() end
-	end)
+	if robberies.ship.open == true and robberies.ship.hasRobbed == true or robberies.crate.open == false and robberies.mansion.open == false then ServerHop() return end
+	if robberies.ship.open == false and robberies.ship.hasRobbed == false or robberies.crate.open == false and robberies.mansion.open == false then ServerHop() return end
+	
+	task.wait(1.15)
+	
+	if robberies.ship.open and ServerHopping == false then RobShip() end
+	if robberies.crate.open and ServerHopping == false then RobCrate() end
+	if robberies.mansion.open and ServerHopping == false then RobMansion() end
 end
