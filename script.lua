@@ -1,7 +1,7 @@
 repeat task.wait(1) until game:IsLoaded()
 
-
 local ServerHopping = false
+local HasRendered = false
 
 task.wait(3)
 
@@ -158,6 +158,18 @@ local function HidePickingTeam()
 	
 	
 	repeat task.wait() TeamChooseUI.Hide() until playerGui.TeamGui.Enabled == false or game.Players.LocalPlayer.TeamColor == BrickColor.new("Bright red")
+end
+
+local function RenderWorkspace()
+	local Camera = game.Workspace.CurrentCamera
+	   for x = -1529, 1567, 255 do
+		for z = -5179, 717, 255 do
+			Camera.CameraType = Enum.CameraType.Scriptable
+			Camera.CFrame = CFrame.new(x, 10, z)
+			task.wait()
+		 end
+	  end
+    Camera.CameraType = Enum.CameraType.Custom
 end
 
 local function WaitForReward()
@@ -827,6 +839,8 @@ while true do
 	
 	wait(.1)
 	
+	if HasRendered == false then RenderWorkspace() HasRendered = true end
+
 	if robberies.ship.open and ServerHopping == false then HidePickingTeam() RobShip() end
 	if robberies.crate.open and ServerHopping == false then HidePickingTeam() RobCrate() end
 	if robberies.mansion.open and ServerHopping == false then HidePickingTeam() RobMansion() end
