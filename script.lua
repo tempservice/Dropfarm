@@ -836,9 +836,10 @@ while wait() do
 		HidePickingTeam()
 		RobCrate()
 		DropGetter = nil
-	elseif robberies.ship.open then
+	elseif robberies.ship.open and robberies.ship.hasRobbed == false then
 		HidePickingTeam()
 		RobShip()
+		robberies.ship.hasRobbed = true
 	elseif robberies.crate.open then
 		HidePickingTeam()
 		RobCrate()
