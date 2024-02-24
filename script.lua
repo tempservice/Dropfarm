@@ -853,16 +853,5 @@ while wait() do
 	end	
 	
 	
-	if not DropGetter then
-	    -- sob
-	elseif robberies.ship.open == false then
-		-- sob
-	elseif robberies.crate.open == false then
-		-- sob
-	elseif robberies.mansion.open and player.Folder:FindFirstChild("MansionInvite") then
-		-- sob
-	else
-		repeat task.wait(.1) ServerHop() until not game.Players.LocalPlayer
-	end	
-	
+	repeat task.wait(1) ServerHop() until game.Players.LocalPlayer == nil
 end
