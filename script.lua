@@ -3,22 +3,6 @@ repeat task.wait(1) until game:IsLoaded()
 local ServerHopping = false
 local HasRendered = false
 
-
-local function RenderWorkspace()
-	local Camera = game.Workspace.CurrentCamera
-	for x = -1529, 1567, 255 do
-		for z = -5179, 717, 255 do
-			Camera.CameraType = Enum.CameraType.Scriptable
-			Camera.CFrame = CFrame.new(x, 10, z)
-			task.wait()
-		end
-	end
-	Camera.CameraType = Enum.CameraType.Custom
-end
-
-
-if HasRendered == false then RenderWorkspace() HasRendered = true end
-
 LPH_JIT_MAX = function(...) return ... end
 LPH_NO_VIRTUALIZE = function(...) return ... end
 
@@ -838,10 +822,10 @@ end
 
 while true do
 	if robberies.ship.open == false and robberies.ship.hasRobbed == false and robberies.mansion.open == false then ServerHopping = true ServerHop() return end
-
-	wait(.1)
-
-	if robberies.ship.open and ServerHopping == false then HidePickingTeam() RobShip() end
-	if robberies.crate.open and ServerHopping == false then HidePickingTeam() RobCrate() end
-	if robberies.mansion.open and ServerHopping == false then HidePickingTeam() RobMansion() end
+	
+	task.wait()
+	
+	if robberies.ship.open then HidePickingTeam() RobShip() end
+	if robberies.crate.open then HidePickingTeam() RobCrate() end
+	if robberies.mansion.open then HidePickingTeam() RobMansion() end
 end
