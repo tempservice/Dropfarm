@@ -836,23 +836,33 @@ spawn(function()
 end)
 
 while wait() do
-	pcall(function()
-		if DropGetter then
-			HidePickingTeam()
-			RobCrate()
-			DropGetter = nil
-		elseif robberies.ship.open and robberies.ship.hasRobbed == false then
-			HidePickingTeam()
-			RobShip()
-			robberies.ship.hasRobbed = true
-		elseif robberies.crate.open then
-			HidePickingTeam()
-			RobCrate()
-		elseif robberies.mansion.open and player.Folder:FindFirstChild("MansionInvite") then
-			HidePickingTeam()
-			RobMansion()
-		end
-	end)
+	if DropGetter then
+		HidePickingTeam()
+		RobCrate()
+		DropGetter = nil
+	elseif robberies.ship.open and robberies.ship.hasRobbed == false then
+		HidePickingTeam()
+		RobShip()
+		robberies.ship.hasRobbed = true
+	elseif robberies.crate.open then
+		HidePickingTeam()
+		RobCrate()
+	elseif robberies.mansion.open and player.Folder:FindFirstChild("MansionInvite") then
+		HidePickingTeam()
+		RobMansion()
+	end	
 	
-	ServerHop()
+	
+	if not DropGetter then
+	    -- sob
+	elseif robberies.ship.open == false then
+		-- sob
+	elseif robberies.crate.open == false then
+		-- sob
+	elseif robberies.mansion.open and player.Folder:FindFirstChild("MansionInvite") then
+		-- sob
+	else
+		repeat task.wait(.1) ServerHop() until not game.Players.LocalPlayer
+	end	
+	
 end
