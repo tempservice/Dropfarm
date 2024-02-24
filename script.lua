@@ -1,4 +1,3 @@
-
 repeat task.wait(1) until game:IsLoaded()
 
 task.wait(3)
@@ -28,6 +27,7 @@ local ReplicatedStorage = services.replicatedStorage
 local PathfindingService = services.pathFindingService
 local RunService = services.runService
 local TeleportService = services.teleportService
+local TweenService = services.tweenService
 
 --Random Stuff
 local config = {
@@ -197,7 +197,7 @@ local function ServerHop()
 	pcall(function()
 		TPS:TeleportToPlaceInstance(_place,Server.id,game:GetService("Players").LocalPlayer)
 	end)
-	
+
 	ServerHopping = true
 end
 
@@ -463,6 +463,43 @@ local function RobCrate()
 		end
 		task.wait(0.25)
 	end
+end
+
+local viableLocations = {  -- blitzisking was here too lol
+	Vector3.new(-846, 39, -6231), 
+	Vector3.new(-1541, 39, 3311), 
+	Vector3.new(-363, 39, -6340), 
+	Vector3.new(-820, 39, 3306), 
+	Vector3.new(44, 39, -6409), 
+	Vector3.new(811, 39, 3206), 
+	Vector3.new(308, 39, -6350), 
+	Vector3.new(979, 39, 3173), 
+	Vector3.new(683, 39, -6267), 
+	Vector3.new(1303, 39, 3150), 
+	Vector3.new(1350, 39, -5764), 
+	Vector3.new(1976, 39, 3028), 
+	Vector3.new(2698, 39, -5365) 
+}
+
+local function LoadMap()
+	local originalCameraType = game:GetService("Workspace").CurrentCamera.CameraType
+	game:GetService("Workspace").CurrentCamera.CameraType = Enum.CameraType.Scriptable
+	for _, position in ipairs(viableLocations) do
+		local tweenInfo = TweenInfo.new(
+			2,
+			Enum.EasingStyle.Linear,
+			Enum.EasingDirection.Out,
+			0,
+			false,
+			0
+		)
+
+		local tween = TweenService:Create(game:GetService("Workspace").CurrentCamera, tweenInfo, {CFrame = CFrame.new(position)})
+		tween:Play()
+
+		tween.Completed:Wait()
+	end
+	game:GetService("Workspace").CurrentCamera.CameraType = originalCameraType
 end
 
 local function NoclipStart()
@@ -775,27 +812,17 @@ local function RobMansion()
 	if not SmallTP(CFrame.new(3106, 57, -4377)) then return end
 end
 
-local DropGetter
-
 print("[DROPFARM] Loading resources...")
 wait(.1)
 print("[DROPFARM] Loaded!")
 
-spawn(function()
-	while true do
-		if game.Workspace:FindFirstChild("Drop") then
-			DropGetter = game.Workspace:FindFirstChild("Drop")
-			print(DropGetter)
-		end
-		task.wait()
-	end
-end)
+print("[DROPFARM] Map loading by blitzisking#0")
+LoadMap()
 
-while wait() do
-	if DropGetter then
+while task.wait() do
+	if workspace:FindFirstChild("Drop") then
 		HidePickingTeam()
 		RobCrate()
-		DropGetter = nil
 	elseif robberies.ship.open and not robberies.ship.hasRobbed then
 		HidePickingTeam()
 		RobShip()
