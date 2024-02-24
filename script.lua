@@ -835,7 +835,7 @@ end)
 spawn(function()
 	while true do
 		if robberies.ship.open then HidePickingTeam() RobShip() end
-		if robberies.crate.open or game.Workspace:FindFirstChild("Drop") or DropGetter then HidePickingTeam() RobCrate() end
+		if robberies.crate.open or game.Workspace:FindFirstChild("Drop") or DropGetter ~= nil then HidePickingTeam() RobCrate() end
 		if robberies.mansion.open and player.Folder:FindFirstChild("MansionInvite") then HidePickingTeam() RobMansion() end
 		wait(.1)
 	end
