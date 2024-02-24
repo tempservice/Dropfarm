@@ -1,5 +1,7 @@
 repeat task.wait(1) until game:IsLoaded()
 
+task.wait(3)
+
 local ServerHopping = false
 
 LPH_JIT_MAX = function(...) return ... end
@@ -254,14 +256,14 @@ local rayCast = LPH_NO_VIRTUALIZE(function(pos, dir)
 	local ignoreList = {}
 	if char then table.insert(ignoreList, char) end
 	if vehicle then table.insert(ignoreList, vehicle) end
-	local rain = services.workspace:FindFirstChild('Rain')
+	local rain = game.Workspace:FindFirstChild('Rain')
 	if rain then table.insert(ignoreList, rain) end
 
 	local params = RaycastParams.new()
 	params.RespectCanCollide = true
 	params.FilterDescendantsInstances = ignoreList
 	params.IgnoreWater = true
-	local result = services.workspace:Raycast(pos, dir, params)
+	local result = game.Workspace:Raycast(pos, dir, params)
 	if result then return result.Instance, result.Position else return nil, nil end
 end)
 
@@ -292,7 +294,7 @@ local GetVehiclePos = LPH_JIT_MAX(function(playerPos)
 	local targetVehicle
 	local minDist = math.huge
 
-	for _, vehicle in pairs(services.workspace.Vehicles:GetChildren()) do
+	for _, vehicle in pairs(game.Workspace.Vehicles:GetChildren()) do
 		if vehicle.name ~= 'Heli' then continue end
 		if vehicle.Seat.position.y > 300 then continue end
 		local pos = vehicle.Seat.Position
@@ -412,7 +414,7 @@ local RobShip = LPH_NO_VIRTUALIZE(function()
 	ropePull.Massless = true
 
 	for _ = 1, 2 do
-		local crate = services.workspace.CargoShip.Crates:GetChildren()[1]
+		local crate = game.Workspace.CargoShip.Crates:GetChildren()[1]
 		player:RequestStreamAroundAsync(crate.MeshPart.Position, 1000)
 
 		repeat
