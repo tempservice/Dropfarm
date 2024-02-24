@@ -5,6 +5,8 @@ task.wait(3)
 LPH_JIT_MAX = function(...) return ... end
 LPH_NO_VIRTUALIZE = function(...) return ... end
 
+local ServerHopping = false
+
 local services = {
 	replicatedStorage = game:GetService('ReplicatedStorage'),
 	tweenService = game:GetService('TweenService'),
@@ -241,7 +243,8 @@ local function ServerHop()
 			end)
 		end
 	end
-
+	
+	ServerHopping = true
 	TeleportSmall()
 end
 
@@ -853,5 +856,5 @@ while wait() do
 	end	
 	
 	
-	repeat task.wait(1) print" bruh " ServerHop() until game.Players.LocalPlayer == nil
+	repeat task.wait() print"HOPPING" ServerHop() until ServerHopping == true
 end
