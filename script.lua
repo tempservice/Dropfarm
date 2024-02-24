@@ -486,7 +486,7 @@ local function LoadMap()
 	game:GetService("Workspace").CurrentCamera.CameraType = Enum.CameraType.Scriptable
 	for _, position in ipairs(viableLocations) do
 		local tweenInfo = TweenInfo.new(
-			0.1,
+			0.8,
 			Enum.EasingStyle.Linear,
 			Enum.EasingDirection.Out,
 			0,
