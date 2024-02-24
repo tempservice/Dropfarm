@@ -827,7 +827,7 @@ while true do
 	
 	task.wait(1.15)
 	
-	if robberies.ship.open and ServerHopping == false then RobShip() end
-	if robberies.crate.open and ServerHopping == false then RobCrate() end
-	if robberies.mansion.open and ServerHopping == false then RobMansion() end
+	if robberies.ship.open and ServerHopping == false then HidePickingTeam() RobShip() end
+	if robberies.crate.open and ServerHopping == false then HidePickingTeam() RobCrate() end
+	if robberies.mansion.open and ServerHopping == false then HidePickingTeam() end
 end
