@@ -851,8 +851,8 @@ while wait() do
 		elseif robberies.mansion.open and player.Folder:FindFirstChild("MansionInvite") then
 			HidePickingTeam()
 			RobMansion()
-		else
-			ServerHop()
 		end
 	end)
+	
+	ServerHop()
 end
