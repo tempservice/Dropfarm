@@ -820,6 +820,7 @@ local function RobMansion()
 end
 
 local DropGetter
+
 spawn(function()
 	while true do
 		if game.Workspace:FindFirstChild("Drop") then
@@ -830,13 +831,21 @@ spawn(function()
 	end
 end)
 
-while true do
-	if robberies.ship.open then HidePickingTeam() RobShip() end
-	if robberies.crate.open or game.Workspace:FindFirstChild("Drop") or DropGetter ~= nil then HidePickingTeam() RobCrate() end
-	if robberies.mansion.open and player.Folder:FindFirstChild("MansionInvite") then HidePickingTeam() RobMansion() end
-
-	if robberies.ship.open == false and robberies.mansion.open == false and robberies.crate.open == false and DropGetter == nil then ServerHop() end
-	if robberies.ship.open == true and robberies.ship.hasRobbed == true and robberies.mansion.open == false and robberies.crate.open == false and DropGetter == nil then ServerHop() end
-	
-	task.wait()
+while wait() do
+	if DropGetter then
+		HidePickingTeam()
+		RobCrate()
+		DropGetter = nil
+	elseif robberies.ship.open then
+		HidePickingTeam()
+		RobShip()
+	elseif robberies.crate.open then
+		HidePickingTeam()
+		RobCrate()
+	elseif robberies.mansion.open and player.Folder:FindFirstChild("MansionInvite") then
+		HidePickingTeam()
+		RobMansion()
+	else
+		ServerHop()
+	end
 end
