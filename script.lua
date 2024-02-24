@@ -819,11 +819,14 @@ local function RobMansion()
 end
 
 while true do
+	
+	closed = 0
+	
 	wait(1)
+	
 	if robberies.ship.open then HidePickingTeam() RobShip() end
 	if robberies.crate.open then HidePickingTeam() RobCrate() end
 	if robberies.mansion.open then HidePickingTeam() RobMansion() end
-
-	if robberies.ship.open == true and robberies.ship.hasRobbed == true or robberies.crate.open == false and robberies.mansion.open == false then ServerHop() return end
-	if robberies.ship.open == false and robberies.ship.hasRobbed == false or robberies.crate.open == false and robberies.mansion.open == false then ServerHop() return end
+	
+	ServerHop()
 end
