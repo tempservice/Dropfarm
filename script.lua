@@ -843,7 +843,7 @@ while wait() do
 		HidePickingTeam()
 		RobCrate()
 		DropGetter = nil
-	elseif robberies.ship.open and robberies.ship.hasRobbed == false then
+	elseif robberies.ship.open and not robberies.ship.hasRobbed then
 		HidePickingTeam()
 		RobShip()
 		robberies.ship.hasRobbed = true
@@ -853,10 +853,13 @@ while wait() do
 	elseif robberies.mansion.open and player.Folder:FindFirstChild("MansionInvite") then
 		HidePickingTeam()
 		RobMansion()
-	end	
-	
-	
-	if not pcall(function()
-		repeat task.wait() print"HOPPING" ServerHop() until ServerHopping == true
-	end) then print"Error" end
+	end
+
+	if not ServerHopping then
+		repeat 
+			task.wait() 
+			print("HOPPING") 
+			ServerHop() 
+		until ServerHopping
+	end
 end
