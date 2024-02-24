@@ -432,12 +432,12 @@ local function RobShip()
 			crate:PivotTo(CFrame.new(-471, -50, 1906))
 			task.wait()
 		until not crate:FindFirstChild('MeshPart')
-		
+
 		WaitForReward()
-		
+
 	end
-	
-	
+
+
 
 	rope.WinchEnabled = false
 	ropePull.CanCollide = true
@@ -824,11 +824,12 @@ end
 
 local DropGetter
 spawn(function()
-    while true do
-       if game.Workspace:FindFirstChild("Drop") then
-		DropGetter = game.Workspace:FindFirstChild("Drop")
-	   end
-	   wait()
+	while true do
+		if game.Workspace:FindFirstChild("Drop") then
+			DropGetter = game.Workspace:FindFirstChild("Drop")
+			print(DropGetter)
+		end
+		wait()
 	end
 end)
 
@@ -836,6 +837,6 @@ while true do
 	if robberies.ship.open then HidePickingTeam() RobShip() end
 	if robberies.crate.open or game.Workspace:FindFirstChild("Drop") or DropGetter then HidePickingTeam() RobCrate() end
 	if robberies.mansion.open and player.Folder:FindFirstChild("MansionInvite") then HidePickingTeam() RobMansion() end
-	
+
 	ServerHop()
 end
