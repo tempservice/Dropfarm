@@ -27,6 +27,7 @@ local ReplicatedStorage = services.replicatedStorage
 local PathfindingService = services.pathFindingService
 local RunService = services.runService
 local TeleportService = services.teleportService
+local TweenService = services.tweenService
 
 --Random Stuff
 local config = {
@@ -290,6 +291,14 @@ local ExitVehicle = function()
 	until not vehicle
 end
 
+local function IsArrested()
+	if player.PlayerGui.MainGui.CellTime.Visible or player.Folder:FindFirstChild("Cuffed") then
+		return true
+	end
+
+	return false
+end
+
 local InHeli = function() return ((vehicle and vehicle.Name == 'Heli') and true) or false end
 
 --Movement
@@ -445,7 +454,7 @@ local function RobCrate()
 		task.wait(1)
 		dropMAIN.BriefcasePress:FireServer(true)
 		dropMAIN.BriefcaseCollect:FireServer()
-	until dropMAIN:GetAttribute("BriefcaseCollected") == true or not dropMAIN:FindFirstChild("Root")
+	until dropMAIN:GetAttribute("BriefcaseCollected") == true or not dropMAIN:FindFirstChild("Root") or IsArrested()
 
 	task.wait(0.75)
 
@@ -475,12 +484,12 @@ local viableLocations = {  -- blitzisking was here too lol
 	Vector3.new(2698, 39, -5365) 
 }
 
-local function LoadMap() -- blitzisking was here lol
+local function LoadMap()
 	local originalCameraType = game:GetService("Workspace").CurrentCamera.CameraType
 	game:GetService("Workspace").CurrentCamera.CameraType = Enum.CameraType.Scriptable
 	for _, position in ipairs(viableLocations) do
 		local tweenInfo = TweenInfo.new(
-			2,
+			0.8,
 			Enum.EasingStyle.Linear,
 			Enum.EasingDirection.Out,
 			0,
@@ -488,7 +497,7 @@ local function LoadMap() -- blitzisking was here lol
 			0
 		)
 
-		local tween = game:GetService("TweenService"):Create(game:GetService("Workspace").CurrentCamera, tweenInfo, {CFrame = CFrame.new(position)})
+		local tween = TweenService:Create(game:GetService("Workspace").CurrentCamera, tweenInfo, {CFrame = CFrame.new(position)})
 		tween:Play()
 
 		tween.Completed:Wait()
@@ -549,14 +558,6 @@ local function LagBackCheck(part)
 			Signal:Disconnect()
 		end
 	}
-end
-
-local function IsArrested()
-	if player.PlayerGui.MainGui.CellTime.Visible or player.Folder:FindFirstChild("Cuffed") then
-		return true
-	end
-
-	return false
 end
 
 local function SmallTP(cframe, speed)
@@ -815,11 +816,13 @@ print("[DROPFARM] Map loading by blitzisking#0")
 LoadMap()
 
 while task.wait() do
-	if workspace:FindFirstChild("Drop") and workspace:FindFirstChild("Drop"):GetAttribute("BriefcaseLanded") == true then
+	if workspace:FindFirstChild("Drop") then
 		RobCrate()
 	elseif robberies.ship.open and not robberies.ship.hasRobbed then
 		RobShip()
 		robberies.ship.hasRobbed = true
+	elseif robberies.crate.open then
+		RobCrate()
 	elseif robberies.mansion.open and player.Folder:FindFirstChild("MansionInvite") then
 		RobMansion()
 	else
