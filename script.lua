@@ -853,5 +853,5 @@ while wait() do
 	end	
 	
 	
-	repeat task.wait(1) ServerHop() until game.Players.LocalPlayer == nil
+	repeat task.wait(1) print" bruh " ServerHop() until game.Players.LocalPlayer == nil
 end
