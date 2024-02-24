@@ -791,7 +791,7 @@ spawn(function()
 end)
 
 while wait() do
-	if DropGetter ~= nil then
+	if DropGetter then
 		HidePickingTeam()
 		RobCrate()
 		DropGetter = nil
@@ -799,7 +799,7 @@ while wait() do
 		HidePickingTeam()
 		RobShip()
 		robberies.ship.hasRobbed = true
-	elseif robberies.crate.open or DropGetter then
+	elseif robberies.crate.open then
 		HidePickingTeam()
 		RobCrate()
 	elseif robberies.mansion.open and player.Folder:FindFirstChild("MansionInvite") then
