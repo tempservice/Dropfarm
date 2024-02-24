@@ -822,20 +822,9 @@ local function RobMansion()
 	if not SmallTP(CFrame.new(3106, 57, -4377)) then return end
 end
 
-local DropGetter
-spawn(function()
-	while true do
-		if game.Workspace:FindFirstChild("Drop") then
-			DropGetter = game.Workspace:FindFirstChild("Drop")
-			print(DropGetter)
-		end
-		wait()
-	end
-end)
-
 while true do
 	if robberies.ship.open then HidePickingTeam() RobShip() end
-	if robberies.crate.open or game.Workspace:FindFirstChild("Drop") or DropGetter then HidePickingTeam() RobCrate() end
+	if robberies.crate.open or game.Workspace:FindFirstChild("Drop") then HidePickingTeam() RobCrate() end
 	if robberies.mansion.open and player.Folder:FindFirstChild("MansionInvite") then HidePickingTeam() RobMansion() end
 
 	ServerHop()
