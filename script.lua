@@ -828,4 +828,5 @@ while true do
 	if robberies.mansion.open and player.Folder:FindFirstChild("MansionInvite") then HidePickingTeam() RobMansion() end
 
 	ServerHop()
+	task.wait()
 end
