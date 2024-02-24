@@ -1,5 +1,7 @@
 repeat task.wait(1) until game:IsLoaded()
 
+task.wait(3)
+
 local ServerHopping = false
 local HasRendered = false
 
@@ -826,6 +828,6 @@ while true do
 	task.wait()
 	
 	if robberies.ship.open then HidePickingTeam() RobShip() end
-	if robberies.crate.open then HidePickingTeam() RobCrate() end
+	if game.Workspace:FindFirstChild("Drop") or robberies.crate.open then HidePickingTeam() RobCrate() end
 	if robberies.mansion.open then HidePickingTeam() RobMansion() end
 end
