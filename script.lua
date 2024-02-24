@@ -169,8 +169,8 @@ end))()
 
 local function HidePickingTeam()
 	local TeamChooseUI = require(ReplicatedStorage.Game.TeamChooseUI)
-	
-	
+
+
 	repeat task.wait() TeamChooseUI.Hide() until playerGui.TeamGui.Enabled == false or game.Players.LocalPlayer.TeamColor == BrickColor.new("Bright red")
 end
 
@@ -837,8 +837,8 @@ local function RobMansion()
 end
 
 while true do
-	if robberies.ship.open == false and robberies.ship.hasRobbed == false or robberies.crate.open == false and robberies.mansion.open == false then ServerHopping = true ServerHop() return end
-	
+	if robberies.ship.open == false and robberies.ship.hasRobbed == false and robberies.mansion.open == false then ServerHopping = true ServerHop() return end
+
 	wait(.1)
 
 	if robberies.ship.open and ServerHopping == false then HidePickingTeam() RobShip() end
