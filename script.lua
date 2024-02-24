@@ -812,6 +812,7 @@ local function RobMansion()
 	if not SmallTP(CFrame.new(3106, 57, -4377)) then return end
 end
 
+HidePickingTeam()
 print("[DROPFARM] Loading resources...")
 wait(.1)
 print("[DROPFARM] Loaded!")
@@ -821,17 +822,13 @@ LoadMap()
 
 while task.wait() do
 	if workspace:FindFirstChild("Drop") then
-		HidePickingTeam()
 		RobCrate()
 	elseif robberies.ship.open and not robberies.ship.hasRobbed then
-		HidePickingTeam()
 		RobShip()
 		robberies.ship.hasRobbed = true
 	elseif robberies.crate.open then
-		HidePickingTeam()
 		RobCrate()
 	elseif robberies.mansion.open and player.Folder:FindFirstChild("MansionInvite") then
-		HidePickingTeam()
 		RobMansion()
 	else
 		if not ServerHopping then
