@@ -156,7 +156,7 @@ local function HidePickingTeam()
 	local TeamChooseUI = require(ReplicatedStorage.Game.TeamChooseUI)
 	
 	
-	repeat TeamChooseUI.Hide() task.wait(.1) until game.Players.LocalPlayer.PlayerGui:FindFirstChild("TeamGui").Enabled == false
+	repeat task.wait() TeamChooseUI.Hide() until playerGui.TeamGui.Enabled == false or game.Players.LocalPlayer.TeamColor == BrickColor.new("Bright red")
 end
 
 local function WaitForReward()
