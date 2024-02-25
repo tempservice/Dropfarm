@@ -835,15 +835,7 @@ LoadMap()
 
 while task.wait() do
 	if workspace:FindFirstChild("Drop") then
-		if RecentlyRobbedCrate == true then
-			task.wait(3)
-			RobCrate()
-		end
-		if RecentlyRobbedCrate == false then
-			RobCrate()
-		end
-		
-		RecentlyRobbedCrate = false
+		RobCrate()
 	elseif robberies.ship.open and not robberies.ship.hasRobbed then
 		RobShip()
 		robberies.ship.hasRobbed = true
