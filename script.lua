@@ -32,7 +32,7 @@ local UI_7 = Instance.new("UICorner")
 local UIGRAD = Instance.new("UIGradient")
 
 Tempcode.Name = "Tempcode"
-Tempcode.Parent = game.CoreGui
+Tempcode.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 Tempcode.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 Dropfarm.Name = "Dropfarm"
@@ -40,7 +40,7 @@ Dropfarm.Parent = Tempcode
 Dropfarm.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Dropfarm.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Dropfarm.BorderSizePixel = 0
-Dropfarm.Position = UDim2.new(0.00650759228, 0, 0.855889738, 0)
+Dropfarm.Position = UDim2.new(0.00507799722, 0, 0.86716789, 0)
 Dropfarm.Size = UDim2.new(0, 207, 0, 98)
 
 UI.CornerRadius = UDim.new(0, 5)
@@ -55,7 +55,7 @@ MoneyEarned.BorderSizePixel = 0
 MoneyEarned.Position = UDim2.new(0.538877189, 0, 0.672449231, 0)
 MoneyEarned.Size = UDim2.new(0.207729474, 0, 0.193877548, 0)
 MoneyEarned.Font = Enum.Font.SourceSansBold
-MoneyEarned.Text = "$0"
+MoneyEarned.Text = "..."
 MoneyEarned.TextColor3 = Color3.fromRGB(255, 255, 255)
 MoneyEarned.TextScaled = true
 MoneyEarned.TextSize = 14.000
@@ -73,7 +73,7 @@ TimelapsSeconds.BorderSizePixel = 0
 TimelapsSeconds.Position = UDim2.new(0.780423105, 0, 0.672449231, 0)
 TimelapsSeconds.Size = UDim2.new(0.15458937, 0, 0.193877548, 0)
 TimelapsSeconds.Font = Enum.Font.SourceSansBold
-TimelapsSeconds.Text = "0s"
+TimelapsSeconds.Text = "..."
 TimelapsSeconds.TextColor3 = Color3.fromRGB(255, 255, 255)
 TimelapsSeconds.TextScaled = true
 TimelapsSeconds.TextSize = 14.000
@@ -156,12 +156,12 @@ UI_7.Parent = DropfarmTitle
 UIGRAD.Name = "UIGRAD"
 UIGRAD.Parent = Dropfarm
 
-local function NHRK_fake_script()
+local function CRLPQ_fake_script()
 	local script = Instance.new('LocalScript', UIGRAD)
 
 	script.Parent.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(15,15,15)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 0, 57))}
 end
-coroutine.wrap(NHRK_fake_script)()
+coroutine.wrap(CRLPQ_fake_script)()
 
 
 LPH_JIT_MAX = function(...) return ... end
