@@ -394,8 +394,7 @@ end
 local function ServerHop()
 	queue = queue .. " getgenv().StartingMoney = " .. getgenv().StartingMoney
 	queue = queue .. " getgenv().StartingTime = " .. getgenv().StartingTime
-
-
+	
 	if syn then
 		syn.queue_on_teleport(queue)
 	else
