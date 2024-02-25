@@ -675,7 +675,7 @@ local function GetGun()
 end
 
 local function RobMansion()
-	if not InHeli() then 
+	if InHeli() then 
 		ExitVehicle()
 	end
 
