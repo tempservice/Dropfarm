@@ -341,37 +341,6 @@ coroutine.wrap(LPH_JIT_MAX(function()
 	end
 end))()
 
-spawn(function()
-	while true do
-		getgenv().MoneyEarnedTOTAL += ThisServersMoney
-
-		getgenv().ElapsedTimeTOTAL += ThisServersTime
-		task.wait()
-		print(getgenv().ElapsedTimeTOTAL)
-		print(getgenv().MoneyEarnedTOTAL)
-	end
-end)
-
-spawn(function()
-	while true do
-		local MoneyEarn = getgenv().MoneyEarnedTOTAL
-		
-		MoneyEarned.Text = "$" .. tostring(FormatCash(MoneyEarn))
-		
-		task.wait()
-	end
-end)
-
-spawn(function()
-	while true do
-		local TimeTotal = getgenv().ElapsedTimeTOTAL
-		
-		TimelapsSeconds.Text = TickToHM(TimeTotal)
-		
-		task.wait()
-	end
-end)
-
 --Functions
 
 local function HidePickingTeam()
@@ -1126,6 +1095,37 @@ spawn(function()
 				until ServerHopping
 			end
 		end
+		task.wait()
+	end
+end)
+
+spawn(function()
+	while true do
+		getgenv().MoneyEarnedTOTAL += ThisServersMoney
+
+		getgenv().ElapsedTimeTOTAL += ThisServersTime
+		task.wait()
+		print(getgenv().ElapsedTimeTOTAL)
+		print(getgenv().MoneyEarnedTOTAL)
+	end
+end)
+
+spawn(function()
+	while true do
+		local MoneyEarn = getgenv().MoneyEarnedTOTAL
+
+		MoneyEarned.Text = "$" .. tostring(FormatCash(MoneyEarn))
+
+		task.wait()
+	end
+end)
+
+spawn(function()
+	while true do
+		local TimeTotal = getgenv().ElapsedTimeTOTAL
+
+		TimelapsSeconds.Text = TickToHM(TimeTotal)
+
 		task.wait()
 	end
 end)
