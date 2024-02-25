@@ -631,9 +631,8 @@ local function RobShip()
 			crate:PivotTo(CFrame.new(-471, -50, 1906))
 			task.wait()
 		until not crate:FindFirstChild('MeshPart')
+		WaitForReward()
 	end
-
-
 
 	rope.WinchEnabled = false
 	ropePull.CanCollide = true
@@ -701,15 +700,11 @@ local function RobCrate()
 		dropMAIN:FindFirstChild("NPCs"):Destroy()
 	end)
 
-	local dropDone = false
-
 	repeat 
 		dropMAIN.BriefcasePress:FireServer()
 		dropMAIN.BriefcaseCollect:FireServer()	
 		task.wait()
 	until dropMAIN:GetAttribute("BriefcaseCollected") == true or not dropMAIN:FindFirstChild("Root")
-
-	WaitForReward()
 
 	task.wait(0.75)
 
@@ -721,6 +716,8 @@ local function RobCrate()
 		end
 		task.wait(0.25)
 	end
+	
+	WaitForReward()
 
 	dropMAIN:Destroy()
 end
