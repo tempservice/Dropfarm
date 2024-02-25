@@ -291,14 +291,6 @@ local ExitVehicle = function()
 	until not vehicle
 end
 
-local function IsArrested()
-	if player.PlayerGui.MainGui.CellTime.Visible or player.Folder:FindFirstChild("Cuffed") then
-		return true
-	end
-
-	return false
-end
-
 local InHeli = function() return ((vehicle and vehicle.Name == 'Heli') and true) or false end
 
 --Movement
@@ -560,6 +552,14 @@ local function LagBackCheck(part)
 	}
 end
 
+function IsArrested()
+	if player.PlayerGui.MainGui.CellTime.Visible or player.Folder:FindFirstChild("Cuffed") then
+		return true
+	end
+
+	return false
+end
+
 local function SmallTP(cframe, speed)
 	if not char or not root or IsArrested() then
 		return false
@@ -807,7 +807,6 @@ local function RobMansion()
 	if not SmallTP(CFrame.new(3106, 57, -4377)) then return end
 end
 
-HidePickingTeam()
 print("[DROPFARM] Loading resources...")
 wait(.1)
 print("[DROPFARM] Loaded!")
@@ -817,13 +816,17 @@ LoadMap()
 
 while task.wait() do
 	if workspace:FindFirstChild("Drop") then
+		HidePickingTeam()
 		RobCrate()
 	elseif robberies.ship.open and not robberies.ship.hasRobbed then
+		HidePickingTeam()
 		RobShip()
 		robberies.ship.hasRobbed = true
 	elseif robberies.crate.open then
+		HidePickingTeam()
 		RobCrate()
 	elseif robberies.mansion.open and player.Folder:FindFirstChild("MansionInvite") then
+		HidePickingTeam()
 		RobMansion()
 	else
 		if not ServerHopping then
