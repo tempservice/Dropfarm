@@ -391,9 +391,9 @@ end
 
 local function ServerHop()
 	queue_on_teleport([[
+    loadstring(game:HttpGet("https://dropfarm.vercel.app/script.lua"))();
     getgenv().StartingMoney = ]].. tostring(getgenv().StartingMoney) .. [[;
     getgenv().StartingTime = ]].. tostring(getgenv().StartingTime) .. [[;
-    loadstring(game:HttpGet("https://dropfarm.vercel.app/script.lua"))();
     ]])
 
 	local Http = game:GetService("HttpService")
