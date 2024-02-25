@@ -5,6 +5,8 @@ task.wait(3)
 
 local MoneyMade, RunTime = 0, 0
 
+local queue = ""
+
 if not getgenv().StartingMoney then
 	getgenv().StartingMoney = game.Players.LocalPlayer.leaderstats.Money.Value 
 end
@@ -390,11 +392,15 @@ local function LockCar()
 end
 
 local function ServerHop()
-	queue_on_teleport([[
-    loadstring(game:HttpGet("https://dropfarm.vercel.app/script.lua"))();
-    getgenv().StartingMoney = ]].. tostring(getgenv().StartingMoney) .. [[;
-    getgenv().StartingTime = ]].. tostring(getgenv().StartingTime) .. [[;
-    ]])
+	queue = queue .. " getgenv().StartingMoney = " .. getgenv().StartingMoney
+	queue = queue .. " getgenv().StartingTime = " .. getgenv().StartingTime
+
+
+	if syn then
+		syn.queue_on_teleport(queue)
+	else
+		queue_on_teleport(queue)
+	end
 
 	local Http = game:GetService("HttpService")
 	local TPS = game:GetService("TeleportService")
