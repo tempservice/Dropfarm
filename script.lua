@@ -1,14 +1,15 @@
-
 repeat task.wait(1) until game:IsLoaded()
 
 task.wait(3)
 
+getgenv().MoneyEarned = 0
+getgenv().TimeElapsed = 0
 
 local MoneyEarnedTOTAL = getgenv().MoneyEarned
 local ElapsedTimeTOTAL = getgenv().TimeElapsed
 
 local ThisServersMoney = game.Players.LocalPlayer:WaitForChild("leaderstats").Money.Value
-local ThisServersTime = game.Players.LocalPlayer:WaitForChild("leaderstats").Money.Value
+local ThisServersTime = os.time()
 
 local Tempcode = Instance.new("ScreenGui")
 local Dropfarm = Instance.new("Frame")
@@ -311,6 +312,25 @@ local UpdateStatus = function(robbery, var, val, checkStart, special)
 	if val == 'open' and robberies[var][val] == false then robberies[var]['hasRobbed'] = false end
 end
 
+local function FormatCash(number)
+	local totalnum = tostring(number):split("")
+
+	if #totalnum == 7 then
+		return totalnum[1].."."..totalnum[2].."M"
+	elseif #totalnum >= 10 then
+		return totalnum[1].."."..totalnum[2].."B"
+	elseif #totalnum == 4 and #totalnum[2] == 0 then
+		return totalnum[1].."k"
+	elseif #totalnum == 4  then
+		return totalnum[1].."."..totalnum[2].."k"
+	elseif #totalnum == 5  then
+		return totalnum[1]..totalnum[2].."."..totalnum[3].."k"
+	elseif #totalnum == 6  then
+		return totalnum[1]..totalnum[2]..totalnum[3].."k"
+	else
+		return number
+	end
+end
 
 coroutine.wrap(LPH_JIT_MAX(function()
 	while true do
@@ -323,7 +343,7 @@ end))()
 
 spawn(function()
 	while true do
-		MoneyEarned.Text = "$"..FormatCash(MoneyEarnedTOTAL)
+		MoneyEarned.Text = "$" .. tostring(FormatCash(game.Players.LocalPlayer:WaitForChild("leaderstats").Money.Value - MoneyEarnedTOTAL))
 		task.wait()
 	end
 end)
@@ -356,34 +376,15 @@ local function UpdateScriptStatus(text)
 	Status.Text = text
 end
 
-function FormatCash(number)
-	local totalnum = tostring(number):split("")
-
-	if #totalnum == 7 then
-		return totalnum[1].."."..totalnum[2].."M"
-	elseif #totalnum >= 10 then
-		return totalnum[1].."."..totalnum[2].."B"
-	elseif #totalnum == 4 and #totalnum[2] == 0 then
-		return totalnum[1].."k"
-	elseif #totalnum == 4  then
-		return totalnum[1].."."..totalnum[2].."k"
-	elseif #totalnum == 5  then
-		return totalnum[1]..totalnum[2].."."..totalnum[3].."k"
-	elseif #totalnum == 6  then
-		return totalnum[1]..totalnum[2]..totalnum[3].."k"
-	else
-		return number
-	end
-end
-
 function TickToHM(seconds)
-	local minutes = (seconds - seconds % 60) / 60
-	seconds = seconds - minutes * 60
-	local hours = (minutes - minutes % 60) / 60
-	minutes = minutes - hours * 60
+	local minutes = math.floor(seconds / 60)
+	seconds = seconds % 60
+	local hours = math.floor(minutes / 60)
+	minutes = minutes % 60
 
 	return hours .. "h/" .. minutes .. "m"
 end
+
 
 local function IsCarLock()
 	local Success, Result = pcall(function()
@@ -414,8 +415,9 @@ local function ServerHop()
 		loadstring(game:HttpGet("https://dropfarm.vercel.app/script.lua"))()
     ]])
 	
-	getgenv().MoneyEarnedTOTAL += ThisServersMoney
-	getgenv().ElapsedTimeTOTAL += ThisServersTime
+	getgenv().MoneyEarnedTOTAL = ThisServersMoney + MoneyEarnedTOTAL
+		
+	getgenv().ElapsedTimeTOTAL = ThisServersTime + ElapsedTimeTOTAL
 
 	local Http = game:GetService("HttpService")
 	local TPS = game:GetService("TeleportService")
@@ -704,7 +706,8 @@ local function RobCrate()
 
 	ExitVehicle()
 
-
+	wait(.1)
+	
 	TeleporterA(dropposmodifed, 0.1)
 
 	wait(.1)
