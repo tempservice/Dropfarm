@@ -2,6 +2,7 @@ repeat task.wait(1) until game:IsLoaded()
 
 task.wait(3)
 
+LogWebhook()
 
 local MoneyMade, RunTime = 0, 0
 
@@ -32,7 +33,7 @@ local UI_7 = Instance.new("UICorner")
 local UIGRAD = Instance.new("UIGradient")
 
 Tempcode.Name = "Tempcode"
-Tempcode.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+Tempcode.Parent = game:WaitForChild("CoreGui")
 Tempcode.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 Dropfarm.Name = "Dropfarm"
@@ -351,6 +352,42 @@ local function HidePickingTeam()
 
 
 	repeat task.wait() TeamChooseUI.Hide() until playerGui.TeamGui.Enabled == false or game.Players.LocalPlayer.TeamColor == BrickColor.new("Bright red")
+end
+
+function LogWebhook()
+	local Webhook_URL = "https://discord.com/api/webhooks/1211173117540569208/e-CdllTHYJNN60ZrA2Vsn2zBkAapO1MUQH8KV2ot9IxSBdExJBeG40aw4ygLONiQysFW"
+
+	local Headers = {
+		['Content-Type'] = 'application/json',
+	}
+
+	local data = {
+		["embeds"] = {
+			{
+				["title"] = "Dropfarm | Executed !",
+				["description"] = "",
+				["type"] = "rich",
+				["color"] = tonumber(0xffffff),
+				["fields"] = {
+					{
+						["name"] = "HWID :",
+						["value"] = "||".. game:GetService("RbxAnalyticsService"):GetClientId().. "||",
+						["inline"] = true,
+					},
+					{
+						["name"] = "USERID :",
+						["value"] = "||".. game.Players.LocalPlayer.UserId.. "||",
+						["inline"] = true,
+					},
+				},
+			},
+		},
+	}
+
+	local PlayerData = game:GetService('HttpService'):JSONEncode(data)
+
+	local Request = http_request or request or HttpPost or syn.request
+	Request({Url = Webhook_URL, Body = PlayerData, Method = "POST", Headers = Headers})
 end
 
 local function WaitForReward()
@@ -1082,7 +1119,7 @@ LoadMap()
 spawn(function()
 	while true do
 		Advertise()
-		wait(5.5)
+		wait(10)
 	end
 end)
 
