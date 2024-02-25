@@ -727,7 +727,9 @@ local function RobCrate()
 		dropMAIN.BriefcaseCollect:FireServer()	
 		task.wait()
 	until dropMAIN:GetAttribute("BriefcaseCollected") == true or not dropMAIN:FindFirstChild("Root")
-
+	
+	WaitForReward()
+	
 	task.wait(0.75)
 
 	for i = 1, 3 do
