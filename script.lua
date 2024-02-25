@@ -2,14 +2,15 @@ repeat task.wait(1) until game:IsLoaded()
 
 task.wait(3)
 
-getgenv().MoneyEarned = 0
-getgenv().TimeElapsed = 0
 
-local MoneyEarnedTOTAL = getgenv().MoneyEarned
-local ElapsedTimeTOTAL = getgenv().TimeElapsed
+local MoneyMade, RunTime = 0, 0
 
-local ThisServersMoney = game.Players.LocalPlayer:WaitForChild("leaderstats").Money.Value
-local ThisServersTime = os.time()
+if not getgenv().StartingMoney then
+	getgenv().StartingMoney = game.Players.LocalPlayer.leaderstats.Money.Value 
+end
+if not getgenv().StartingTime then
+	getgenv().StartingTime = os.time()
+end
 
 local Tempcode = Instance.new("ScreenGui")
 local Dropfarm = Instance.new("Frame")
@@ -392,9 +393,9 @@ local function ServerHop()
 	queue_on_teleport([[
 		loadstring(game:HttpGet("https://dropfarm.vercel.app/script.lua"))()
     ]])
-	
+
 	getgenv().MoneyEarnedTOTAL = ThisServersMoney + MoneyEarnedTOTAL
-		
+
 	getgenv().ElapsedTimeTOTAL = ThisServersTime + ElapsedTimeTOTAL
 
 	local Http = game:GetService("HttpService")
@@ -685,7 +686,7 @@ local function RobCrate()
 	ExitVehicle()
 
 	wait(.1)
-	
+
 	TeleporterA(dropposmodifed, 0.1)
 
 	wait(.1)
@@ -704,9 +705,9 @@ local function RobCrate()
 		dropMAIN.BriefcaseCollect:FireServer()	
 		task.wait()
 	until dropMAIN:GetAttribute("BriefcaseCollected") == true or not dropMAIN:FindFirstChild("Root")
-	
+
 	WaitForReward()
-	
+
 	task.wait(0.75)
 
 	for i = 1, 3 do
@@ -1099,20 +1100,22 @@ spawn(function()
 	end
 end)
 
-spawn(function()
-	while true do
-		getgenv().MoneyEarnedTOTAL += ThisServersMoney
-
-		getgenv().ElapsedTimeTOTAL += ThisServersTime
-		task.wait()
-		print(getgenv().ElapsedTimeTOTAL)
-		print(getgenv().MoneyEarnedTOTAL)
+task.spawn(function()
+	while task.wait(0.5) do
+		pcall(function()
+			MoneyMade = player:WaitForChild("leaderstats"):WaitForChild("Money").Value - getgenv().StartingMoney
+		end)
+		pcall(function()
+			RunTime = os.time() - getgenv().StartingTime
+		end)
+		MoneyEarned.Text = "$" .. FormatCash(MoneyMade)
+		
 	end
 end)
 
-spawn(function()
+task.spawn(function()
 	while true do
-		local MoneyEarn = getgenv().MoneyEarnedTOTAL
+		local MoneyEarn = getgenv().StartingMoney
 
 		MoneyEarned.Text = "$" .. tostring(FormatCash(MoneyEarn))
 
@@ -1122,7 +1125,7 @@ end)
 
 spawn(function()
 	while true do
-		local TimeTotal = getgenv().ElapsedTimeTOTAL
+		local TimeTotal = getgenv().StartingTime
 
 		TimelapsSeconds.Text = TickToHM(TimeTotal)
 
