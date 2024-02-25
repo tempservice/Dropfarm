@@ -391,12 +391,10 @@ end
 
 local function ServerHop()
 	queue_on_teleport([[
-		loadstring(game:HttpGet("https://dropfarm.vercel.app/script.lua"))()
+    getgenv().StartingMoney = ]].. tostring(getgenv().StartingMoney) .. [[;
+    getgenv().StartingTime = ]].. tostring(getgenv().StartingTime) .. [[;
+    loadstring(game:HttpGet("https://dropfarm.vercel.app/script.lua"))();
     ]])
-
-	getgenv().MoneyEarnedTOTAL = ThisServersMoney + MoneyEarnedTOTAL
-
-	getgenv().ElapsedTimeTOTAL = ThisServersTime + ElapsedTimeTOTAL
 
 	local Http = game:GetService("HttpService")
 	local TPS = game:GetService("TeleportService")
@@ -1129,4 +1127,4 @@ while task.wait() do
 			until ServerHopping
 		end
 	end
-end
+endv
