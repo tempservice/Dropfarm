@@ -407,6 +407,17 @@ local function TeleporterC(pos, duration)
 	tper:Disconnect()
 end
 
+local function TeleporterA(pos, duration)
+	local tper = game:GetService("RunService").Heartbeat:Connect(function()
+		root.CFrame = CFrame.new(pos)
+	end)
+
+	wait(duration)
+
+	tper:Disconnect()
+end
+
+
 local function RobCrate()
 	if not InHeli() then 
 		ExitVehicle()
@@ -432,6 +443,9 @@ local function RobCrate()
 	wait(.1)
 	
 	ExitVehicle()
+	
+	
+	TeleporterA(dropposmodifed, 0.1)
 	
 	root.Anchored = true
 	
