@@ -476,6 +476,8 @@ local function RobCrate()
 		end
 		task.wait(0.25)
 	end
+	
+	dropMAIN:Destroy()
 end
 
 local viableLocations = {  -- blitzisking was here too lol
@@ -819,7 +821,7 @@ local function RobMansion()
 	if not SmallTP(CFrame.new(3075, -221, -4485)) then return end
 	if not SmallTP(CFrame.new(3063, -221, -4486)) then return end
 	if not SmallTP(CFrame.new(3064.07495, -220.748993, -4474.64209, 0, 0, -1, 0, 1, 0, 1, 0, 0)) then return end
-	wait(.1)
+	wait(.025)
 	if not SmallTP(CFrame.new(3124, 51, -4415)) then return end
 	if not SmallTP(CFrame.new(3106, 51, -4412)) then return end
 	if not SmallTP(CFrame.new(3106, 57, -4377)) then return end
@@ -827,7 +829,6 @@ end
 
 HidePickingTeam()
 print("[DROPFARM] Loading resources...")
-wait(.1)
 print("[DROPFARM] Loaded!")
 
 print("[DROPFARM] Map loading by blitzisking#0")
