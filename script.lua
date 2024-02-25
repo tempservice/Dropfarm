@@ -815,18 +815,15 @@ print("[DROPFARM] Map loading by blitzisking#0")
 LoadMap()
 
 while task.wait() do
+	HidePickingTeam()
 	if workspace:FindFirstChild("Drop") then
-		HidePickingTeam()
 		RobCrate()
 	elseif robberies.ship.open and not robberies.ship.hasRobbed then
-		HidePickingTeam()
 		RobShip()
 		robberies.ship.hasRobbed = true
 	elseif robberies.crate.open then
-		HidePickingTeam()
 		RobCrate()
 	elseif robberies.mansion.open and player.Folder:FindFirstChild("MansionInvite") then
-		HidePickingTeam()
 		RobMansion()
 	else
 		if not ServerHopping then
