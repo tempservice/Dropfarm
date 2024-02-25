@@ -342,8 +342,14 @@ coroutine.wrap(LPH_JIT_MAX(function()
 end))()
 
 spawn(function()
+	getgenv().MoneyEarnedTOTAL = ThisServersMoney + MoneyEarnedTOTAL
+
+	getgenv().ElapsedTimeTOTAL = ThisServersTime + ElapsedTimeTOTAL
+end)
+
+spawn(function()
 	while true do
-		MoneyEarned.Text = "$" .. tostring(FormatCash(game.Players.LocalPlayer:WaitForChild("leaderstats").Money.Value - MoneyEarnedTOTAL))
+		MoneyEarned.Text = "$" .. tostring(FormatCash(MoneyEarnedTOTAL))
 		task.wait()
 	end
 end)
