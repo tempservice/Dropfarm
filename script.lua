@@ -352,14 +352,20 @@ end)
 
 spawn(function()
 	while true do
-		MoneyEarned.Text = "$" .. tostring(FormatCash(getgenv().MoneyEarnedTOTAL))
+		local MoneyEarn = getgenv().MoneyEarnedTOTAL
+		
+		MoneyEarned.Text = "$" .. tostring(FormatCash(MoneyEarn))
+		
 		task.wait()
 	end
 end)
 
 spawn(function()
 	while true do
-		TimelapsSeconds.Text = TickToHM(getgenv().ElapsedTimeTOTAL)
+		local TimeTotal = getgenv().ElapsedTimeTOTAL
+		
+		TimelapsSeconds.Text = TickToHM(TimeTotal)
+		
 		task.wait()
 	end
 end)
