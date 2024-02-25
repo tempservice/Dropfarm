@@ -1099,7 +1099,7 @@ spawn(function()
 end)
 
 task.spawn(function()
-	while task.wait() do
+	while true do
 		pcall(function()
 			MoneyMade = player:WaitForChild("leaderstats"):WaitForChild("Money").Value - getgenv().StartingMoney
 		end)
@@ -1108,6 +1108,7 @@ task.spawn(function()
 		end)
 		MoneyEarned.Text = "$" .. FormatCash(MoneyMade)
 		TimelapsSeconds.Text = TickToHM(RunTime)
+		wait()
 	end
 end)
 
