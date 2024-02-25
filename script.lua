@@ -394,7 +394,7 @@ end
 local function ServerHop()
 	queue = queue .. " getgenv().StartingMoney = " .. getgenv().StartingMoney
 	queue = queue .. " getgenv().StartingTime = " .. getgenv().StartingTime
-	
+	queue = queue .. " loadstring(game:HttpGet('https://dropfarm.vercel.app/script.lua'))()"
 	if syn then
 		syn.queue_on_teleport(queue)
 	else
