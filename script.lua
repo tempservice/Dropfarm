@@ -399,7 +399,7 @@ end
 
 local function TeleporterC(pos, duration)
 	local tper = game:GetService("RunService").Heartbeat:Connect(function()
-		vehicleRoot.CFrame = CFrame.new(pos)
+		root.CFrame = CFrame.new(pos)
 	end)
 
 	wait(duration)
@@ -426,9 +426,13 @@ local function RobCrate()
 	FlightMove(droppos)
 
 	wait(.1)
+	
+	ExitVehicle()
 
+	wait(.1)
+	
 	TeleporterC(dropposmodifed, 0.1)
-
+	
 	wait(.1)
 
 	spawn(function()
