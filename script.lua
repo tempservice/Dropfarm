@@ -421,8 +421,8 @@ local function RobCrate()
 	local droppos = game.Workspace:FindFirstChild("Drop"):FindFirstChild("Root").Position
 	local dropposmodifed = Vector3.new(dropRoot.Position.X, dropRoot.Position.Y + 2.5, dropRoot.Position.Z)
 
-	print(droppos)
-
+	repeat task.wait() until workspace:FindFirstChild("Drop"):GetAttribute("BriefcaseLanded") == true
+    
 	FlightMove(droppos)
 
 	wait(.1)
@@ -818,7 +818,7 @@ print("[DROPFARM] Map loading by blitzisking#0")
 LoadMap()
 
 while task.wait() do
-	if workspace:FindFirstChild("Drop") and workspace:FindFirstChild("Drop"):GetAttribute("BriefcaseLanded") == true then
+	if workspace:FindFirstChild("Drop") then
 		RobCrate()
 	elseif robberies.ship.open and not robberies.ship.hasRobbed then
 		RobShip()
