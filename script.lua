@@ -1,5 +1,7 @@
 repeat task.wait(1) until game:IsLoaded()
 
+local RecentlyRobbedCrate = false
+
 task.wait(3)
 
 LPH_JIT_MAX = function(...) return ... end
@@ -833,7 +835,15 @@ LoadMap()
 
 while task.wait() do
 	if workspace:FindFirstChild("Drop") then
-		RobCrate()
+		if RecentlyRobbedCrate == true then
+			task.wait(3)
+			RobCrate()
+		end
+		if RecentlyRobbedCrate == false then
+			RobCrate()
+		end
+		
+		RecentlyRobbedCrate = false
 	elseif robberies.ship.open and not robberies.ship.hasRobbed then
 		RobShip()
 		robberies.ship.hasRobbed = true
