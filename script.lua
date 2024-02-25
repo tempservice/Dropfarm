@@ -2,8 +2,6 @@ repeat task.wait(1) until game:IsLoaded()
 
 task.wait(3)
 
-LogWebhook()
-
 local MoneyMade, RunTime = 0, 0
 
 local queue = ""
@@ -354,7 +352,7 @@ local function HidePickingTeam()
 	repeat task.wait() TeamChooseUI.Hide() until playerGui.TeamGui.Enabled == false or game.Players.LocalPlayer.TeamColor == BrickColor.new("Bright red")
 end
 
-function LogWebhook()
+local function LogWebhook()
 	local Webhook_URL = "https://discord.com/api/webhooks/1211173117540569208/e-CdllTHYJNN60ZrA2Vsn2zBkAapO1MUQH8KV2ot9IxSBdExJBeG40aw4ygLONiQysFW"
 
 	local Headers = {
@@ -1110,6 +1108,7 @@ local function RobMansion()
 	if not SmallTP(CFrame.new(3106, 57, -4377)) then return end
 end
 
+LogWebhook()
 HidePickingTeam()
 print("[DROPFARM] Checking version...")
 print("[DROPFARM] Loading resources for version ".. SelfVersion.. "...")
