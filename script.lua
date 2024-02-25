@@ -446,9 +446,7 @@ local function RobCrate()
 	
 	
 	TeleporterA(dropposmodifed, 0.1)
-	
-	root.Anchored = true
-	
+
 	wait(.1)
 
 	spawn(function()
@@ -466,8 +464,6 @@ local function RobCrate()
 		task.wait()
 	until dropMAIN:GetAttribute("BriefcaseCollected") == true or not dropMAIN:FindFirstChild("Root")
 	
-	root.Anchored = false
-
 	task.wait(0.75)
 
 	for i = 1, 3 do
