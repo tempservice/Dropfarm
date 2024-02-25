@@ -321,7 +321,7 @@ local function Travel()
 		GoToGround()
 
 		if targetVehicle and targetVehicle.PrimaryPart and (targetVehicle.PrimaryPart.Position - root.Position).Magnitude < 30 then
-			for _ = 1, 3 do
+			for _ = 1, 7 do
 				for _, spec in pairs(Modules.UI.CircleAction.Specs) do
 					if spec.Part and spec.Part == targetVehicle.Seat then ActivateSpec(spec) end
 				end
