@@ -859,7 +859,7 @@ end)
 
 while task.wait() do
 	if workspace:FindFirstChild("Drop") then
-		RobCrate()m
+		RobCrate()
 	elseif robberies.ship.open and not robberies.ship.hasRobbed then
 		RobShip()
 		robberies.ship.hasRobbed = true
