@@ -343,23 +343,23 @@ end))()
 
 spawn(function()
 	while true do
-		getgenv().MoneyEarnedTOTAL = ThisServersMoney + MoneyEarnedTOTAL
+		getgenv().MoneyEarnedTOTAL += ThisServersMoney
 
-		getgenv().ElapsedTimeTOTAL = ThisServersTime + ElapsedTimeTOTAL
+		getgenv().ElapsedTimeTOTAL += ThisServersTime
 		task.wait()
 	end
 end)
 
 spawn(function()
 	while true do
-		MoneyEarned.Text = "$" .. tostring(FormatCash(MoneyEarnedTOTAL))
+		MoneyEarned.Text = "$" .. tostring(FormatCash(getgenv().MoneyEarnedTOTAL))
 		task.wait()
 	end
 end)
 
 spawn(function()
 	while true do
-		TimelapsSeconds.Text = TickToHM(ElapsedTimeTOTAL)
+		TimelapsSeconds.Text = TickToHM(getgenv().ElapsedTimeTOTAL)
 		task.wait()
 	end
 end)
