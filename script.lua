@@ -29,7 +29,7 @@ local UI_7 = Instance.new("UICorner")
 local UIGRAD = Instance.new("UIGradient")
 
 Tempcode.Name = "Tempcode"
-Tempcode.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+Tempcode.Parent = game.CoreGui
 Tempcode.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 Dropfarm.Name = "Dropfarm"
@@ -342,9 +342,12 @@ coroutine.wrap(LPH_JIT_MAX(function()
 end))()
 
 spawn(function()
-	getgenv().MoneyEarnedTOTAL = ThisServersMoney + MoneyEarnedTOTAL
+	while true do
+		getgenv().MoneyEarnedTOTAL = ThisServersMoney + MoneyEarnedTOTAL
 
-	getgenv().ElapsedTimeTOTAL = ThisServersTime + ElapsedTimeTOTAL
+		getgenv().ElapsedTimeTOTAL = ThisServersTime + ElapsedTimeTOTAL
+		task.wait()
+	end
 end)
 
 spawn(function()
@@ -405,14 +408,6 @@ end
 local function LockCar()
 	if GetVehiclePacket() and not IsCarLock() then
 		Modules.Vehicle.toggleLocalLocked()
-	end
-end
-
-local function reset()
-	if player.health <= 0 then
-		return true
-	else
-		return false
 	end
 end
 
@@ -1126,7 +1121,7 @@ spawn(function()
 end)
 
 while task.wait() do
-	if workspace:FindFirstChild("Drop") then
+	if game.Workspace:FindFirstChild("Drop") then
 		RobCrate()
 	elseif robberies.ship.open and not robberies.ship.hasRobbed then
 		RobShip()
