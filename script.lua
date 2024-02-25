@@ -399,7 +399,7 @@ end
 
 local function TeleporterC(pos, duration)
 	local tper = game:GetService("RunService").Heartbeat:Connect(function()
-		root.CFrame = CFrame.new(pos)
+		vehicleRoot.CFrame = CFrame.new(pos)
 	end)
 
 	wait(duration)
@@ -427,11 +427,11 @@ local function RobCrate()
 
 	wait(.1)
 	
-	ExitVehicle()
+	TeleporterC(dropposmodifed, 0.1)
 
 	wait(.1)
 	
-	TeleporterC(dropposmodifed, 0.1)
+	ExitVehicle()
 	
 	root.Anchored = true
 	
