@@ -479,7 +479,7 @@ local function LoadMap() -- blitzisking was here lol
 	game:GetService("Workspace").CurrentCamera.CameraType = Enum.CameraType.Scriptable
 	for _, position in ipairs(viableLocations) do
 		local tweenInfo = TweenInfo.new(
-			2,
+			0.6,
 			Enum.EasingStyle.Linear,
 			Enum.EasingDirection.Out,
 			0,
