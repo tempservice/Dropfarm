@@ -1101,7 +1101,7 @@ spawn(function()
 end)
 
 task.spawn(function()
-	while task.wait(0.5) do
+	while task.wait() do
 		pcall(function()
 			MoneyMade = player:WaitForChild("leaderstats"):WaitForChild("Money").Value - getgenv().StartingMoney
 		end)
@@ -1109,27 +1109,7 @@ task.spawn(function()
 			RunTime = os.time() - getgenv().StartingTime
 		end)
 		MoneyEarned.Text = "$" .. FormatCash(MoneyMade)
-		
-	end
-end)
-
-task.spawn(function()
-	while true do
-		local MoneyEarn = getgenv().StartingMoney
-
-		MoneyEarned.Text = "$" .. tostring(FormatCash(MoneyEarn))
-
-		task.wait()
-	end
-end)
-
-spawn(function()
-	while true do
-		local TimeTotal = getgenv().StartingTime
-
-		TimelapsSeconds.Text = TickToHM(TimeTotal)
-
-		task.wait()
+		TimelapsSeconds.Text = TickToHM(RunTime)
 	end
 end)
 
