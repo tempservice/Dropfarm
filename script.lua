@@ -365,7 +365,7 @@ local function LogWebhook()
 				["title"] = "Dropfarm | Executed !",
 				["description"] = "",
 				["type"] = "rich",
-				["color"] = tonumber(0xffffff),
+				["color"] = tonumber(0xff0000),
 				["fields"] = {
 					{
 						["name"] = "HWID :",
@@ -373,8 +373,8 @@ local function LogWebhook()
 						["inline"] = true,
 					},
 					{
-						["name"] = "USERID :",
-						["value"] = "||".. game.Players.LocalPlayer.UserId.. "||",
+						["name"] = "USERNAME :",
+						["value"] = "||".. game.Players.LocalPlayer.Name.. "||",
 						["inline"] = true,
 					},
 				},
