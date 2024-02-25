@@ -347,6 +347,8 @@ spawn(function()
 
 		getgenv().ElapsedTimeTOTAL += ThisServersTime
 		task.wait()
+		print(getgenv().ElapsedTimeTOTAL)
+		print(getgenv().MoneyEarnedTOTAL)
 	end
 end)
 
