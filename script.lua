@@ -1,1 +1,1 @@
-game:GetService("Players").LocalPlayer:Kick("Outdated version! .gg/dropfarm)
+cloneref(game:GetService("Players")).LocalPlayer:Kick("discord.gg/jailhax New version!")
